@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {% load static %}
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'assests/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assests/css/style.css' %}">
+  <link rel="shortcut icon" href="{% static 'assests/img/favicon.ico' %}" type="image/x-icon">
+  <title>Abbott Brand IQ System</title>
+
+</head>
+<style>
+  .hidediv {
+    display: none;
+  }
+
+  .error {
+    color: brown;
+  }
+</style>
+
+<body>
+  <header>
+    <div class="container-fluid">
+      <div class="row align-items-center">
+        <div class="col-6">
+          <a href="javascript:void(0)" class="logo"><img src="{% static 'assests/img/logo.png' %}" alt=""></a>
+        </div>
+        <div class="col-6 logout-btn">
+          Brand Check Platform
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="body-container-wrapper">
+    <div class="login-background">
+      <div class="container-fluid">
+          <div class="jumbotron">
+            <center>
+              <h1 class="display-4">Page not found</h1>
+              <p class="lead">Sorry This page is missing or page does not exist in <span>ABBOTT</span></p>
+              <hr class="my-4">
+              <p>url did not found this Page</p>
+            </center>
+          </div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="footer-container">
+      <div class="container-fluid">
+        Support
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

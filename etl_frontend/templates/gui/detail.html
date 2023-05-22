@@ -1,0 +1,49 @@
+{% extends "gui/base.html" %}
+{% block content %}
+{% load static %}
+<div class="white-bg-wrapper">
+    <div class="detail-wrapper">
+        <div class="container-fluid">
+            <div class="detail-box">
+                <div class="back-arrow">
+                    <a href="javascript:void(0)" onclick="history.back()"><img src="static/assests/img/arrow-left.svg"
+                            alt="arrow" /></a>
+                </div>
+                <div class="detail-table">
+                    <ul>
+                        <li>
+                            <div class="detail-title">Two Components</div>
+                            <div class="detail-description">A signature which is also known as logo, comprises of two
+                                components – heroic and wordmark. Combining the two forms a complete signature as per
+                                Abbott guidelines.</div>
+                        </li>
+                        <li>
+                            <div class="detail-title">Three Components</div>
+                            <div class="detail-description">A signature which is also known as logo, comprises of three
+                                components – heroic, “Life to the Fullest” Brandline and wordmark. Combining the three
+                                forms a complete signature as per Abbott guidelines.</div>
+                        </li>
+                        <li>
+                            <div class="detail-title">Clear Space</div>
+                            <div class="detail-description">Refers to the minimum space between the border of the
+                                signature and margin of the document. Clear space is a squared area taking certain
+                                proportion of the height of the signature.</div>
+                        </li>
+                        <li>
+                            <div class="detail-title">All Caps</div>
+                            <div class="detail-description">When the text is written in capital letters and is found in
+                                Headlines, Headline Highlights, Subheadings, and Business Descriptors.</div>
+                        </li>
+                        <li>
+                            <div class="detail-title">Sentence Case</div>
+                            <div class="detail-description">When the text is a running text and not in capital letters
+                                and is found in Headlines, Headline Highlights or Body Copy when Mercury Text G1 is
+                                identified as the font family.</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

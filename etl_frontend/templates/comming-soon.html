@@ -1,0 +1,31 @@
+<html>
+
+<head>
+  <title>Title of the document</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"  crossorigin="anonymous">
+
+</head>
+{% load static %}
+
+<body>
+
+  <div class="jumbotron">
+    <a href="javascript:void(0)" onclick="history.back()">
+    <div class="arrow-wrap">
+      <img src="/static/assests/img/arrow-left.svg" alt="arrow" />
+    </div>
+    </a>
+    <center>
+      <h1 class="display-4"><i> Coming Soon...</i></h1>
+    </center>
+
+    {% comment %}
+    <hr class="my-4">
+    <p>url did not found this Page</p> {% endcomment %}
+
+  </div>
+
+</body>
+<script type="text/javascript" src="{% static 'assests/js/jquery.min.js' %}"></script>
+
+</html>

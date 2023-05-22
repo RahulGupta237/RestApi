@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'assests/css/style.css' %}">
+    <link rel="shortcut icon" href="{% static 'assests/img/favicon.ico' %}" type="image/x-icon">
+    <title>Abbott Brand IQ System</title>
+
+</head>
+<style>
+    .hidediv{
+        display: none;
+    }
+    .error{
+        color: brown;
+    }
+</style>
+<body>
+    <header>
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="col-6">
+                    <a href="javascript:void(0)" class="logo"><img src="{% static 'assests/img/logo.png' %}" alt=""></a>
+                </div>
+                <div class="col-6 logout-btn">
+                   Brand Check Platform
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="body-container-wrapper">
+        <div class="login-background">
+            <div class="container-fluid">
+                <div class="login-form">
+                    <!-- <h1>Login</h1> -->
+                    <form action="" method="post" id="login-form">
+                        {% csrf_token %}
+                       
+                        <div class="form-group">
+                            <input type="text" name="username" id="username" class="form-control" placeholder="Enter username">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" name="password" id="pwd" placeholder="Enter password">
+                            <span class="icon icon-eye-close" id="hide-show"></span>
+
+
+                        </div>
+
+                        <span class="error">
+                            {% for message in messages %}
+                                {{message}}
+                            {% endfor %}
+                        </span>
+
+                        
+                        <div class="btn-group">
+                            <button class="btn btn-primary btn-block" type="submit"><span>Login</span></button>
+                            <!-- <div class="text-right"><a href="javascript:void(0)">Forgot Password?</a></div> -->
+                        </div>
+                        <!-- <div class="btn-group">
+                            <button class="btn btn-secondary btn-block" id="login-btn" type="submit" disabled><span>Login</span></button>
+                        </div> -->
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="footer-container">
+            <div class="container-fluid">
+                Support
+            </div>
+        </div>
+    </footer>
+</body>
+<script type="text/javascript" src="{% static 'assests/js/jquery-3.6.0.min.js' %}"></script>
+
+<script>
+    $(document).ready(function(){
+
+        $("#hide-show").click(function(){
+            var type = $("#pwd").attr('type')
+            if(type == 'password'){
+                $("#pwd").attr('type','text')
+            }else{
+                $("#pwd").attr('type','password')
+            }
+        })
+
+        $("#pwd,#username").keyup(function(){
+            var username = $("#username").val()
+            var password = $("#pwd").val()
+            if(password == '' || username == ''){
+                $("#login-btn").attr('disabled',true)
+                $("#login-btn").css('cursor','not-allowed! important')
+            }else{
+                $("#login-btn").attr('disabled',false)
+                console.log(username+' '+password)
+                $("#login-btn").attr('type','submit')
+            }
+        });
+    })
+</script>
+</html>

@@ -1,0 +1,44 @@
+{% extends "gui/base.html" %}
+{% block content %}
+{% load static %}
+<div class="body-container-wrapper">
+
+  <div class=" login-background-jumbotron">
+    <div class="container-fluid">
+      <div class="jumbotron">
+        <div class="arrow-wrap">
+          <a href="javascript:void(0)" onclick="history.back()"><img src="/static/assests/img/arrow-left.svg"
+              alt="arrow"></a>
+        </div>
+        <main>
+          <h1 class="display-4">Page not found</h1>
+          <p class="lead">Sorry This page is missing or page does not exist in <span>ABBOTT</span></p>
+          <hr class="my-4">
+          <!-- <p>url did not found this Page</p> -->
+          <ul>
+            <li>
+              <h2> Please upload a collateral as instructed below:</h2>
+            </li>
+            <li>
+              <p>Must be uploaded in PDF Format.</p>
+            </li>
+            <li>
+              <p>The text contents within the PDF document must be editable/selectable. </p>
+            </li>
+            <li>
+              <p>Must not have image screenshots.</p>
+            </li>
+            <li>
+              <p>Collateral size must be greater than 300 x 300 pixels.</p>
+            </li>
+            <li>
+              <p>For more details click on &nbsp;<a href="static/assests/Collateral-Upload-Guideline.pdf" download>Show
+                  More..</a></p>
+            </li>
+          </ul>
+        </main>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

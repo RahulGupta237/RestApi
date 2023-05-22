@@ -1,0 +1,88 @@
+{% extends "gui/base.html" %}
+{% block content %}
+
+<div class="body-container-wrapper">
+    <div class="login-background">
+        <div class="container-fluid">
+            <div class="login-form get-started">
+                <div class="form-group">
+                    <div class="get-started-title">get started</div>
+                    <div class="get-started-desc">Please select any one of the following media for your collateral
+                    </div>
+                </div>
+                <form action="" method="post" id="get-started-form">
+                    <div class="row">
+                        <!-- aj code starts here  -->
+                        {% for media in media_collateral %}
+                        <div class="col-sm-12 {{media.media_name|lower}}">
+                            <div class="form-group">
+                                <p class="optionz" id="{{media.media_name|lower}}">{{media.media_name}}</p>
+                                <ul class="optionList hide">
+                                    <li class="list-item default" id="default-{{media.media_name|title}}"  data-val="{{media.media_name|title}}">
+                                        <p>Select {{media.media_name|title}}</p>
+                                    </li>
+                                    {% for collateral in media.collateral_list %}
+                                    {% if collateral.id in disabledColl %}
+                                    <li class="list-item disabled"
+                                        data-media="{{media.media_name|lower}}"
+                                        data-id="{{collateral.id|title}}"
+                                        data-val="{{collateral.collateral_name|title}}">
+                                        <img src="./static/assests/img/{{collateral.collateral_name}}.png"
+                                            alt="" />
+                                        <p class="value">{{collateral.collateral_name}}</p>
+                                    </li>
+                                    {% else%}
+                                    <li class="list-item" data-media="{{media.media_name|lower}}"
+                                        data-id="{{collateral.id|title}}"
+                                        data-val="{{collateral.collateral_name|title}}">
+                                        <img src="./static/assests/img/{{collateral.collateral_name}}.png" alt="" />
+                                        <p class="value">{{collateral.collateral_name}}</p>
+                                    </li>
+                                    {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <!-- aj code ends here  -->
+                    <div class="row category-select-wrap">
+                        <div class="col-sm-12 d-flex get-started-bottom">
+                            <div class="category-box">
+                                <div class="category-title">select category*</div>
+                            </div>
+                            <div class="radio-box">
+                                <div class="radio-group">
+                                    <input type="radio" name="categories" value="Abbott-Exclusive" id="exclusive" />
+                                    <label for="exclusive">abbott exclusive</label>
+                                </div>
+                            </div>
+                            <div class="radio-box">
+                                <div class="radio-group">
+                                    <input type="radio" name="categories" value="co-branded-distributor"
+                                        id="cobranded" />
+                                    <label for="cobranded">co-branded/distributor</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12 go-bottom">
+                            <div class="btn-group">
+                                <a class="btn btn-primary go" id="submitBtn" href="upload-pdf"><span>Go</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="modal-wrapper">
+                    <div class="modal-body">
+                        <p id="modalMsg">Please chose category.</p>
+                        <div class="close-btn"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

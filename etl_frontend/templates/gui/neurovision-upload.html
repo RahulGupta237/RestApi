@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'assests/css/style.css' %}">
+    <link rel="shortcut icon" href="{% static 'assests/img/favicon.ico' %}" type="image/x-icon">
+    <title>Abbott Brand IQ System</title>
+</head>
+<style>
+    .hidediv {
+        display: none;
+    }
+    
+    .error {
+        color: brown;
+    }
+</style>
+
+<body>
+    <header>
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="col-6">
+
+                    <img src="{% static 'assests/img/logo.png' %}" alt="">
+                    <!-- </a> -->
+                </div>
+                <div class="col-6 logout-btn">
+                    <ul class="header-link">
+                        <li>
+                            <a href="javascript:void(0)" class="user">Welcome username <img
+                                    src="{% static 'assests/img/user.png' %}" alt=""></a>
+                            <ul>
+                                <li><a href="#" class="user">Home</a></li>
+                                <li><a href="#" class="user">Logout</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </header>
+    <div class="body-container-wrapper neurovision-upload">
+        <div class="login-background">
+            <div class="login-form document-form">
+                <div class="d-flex justify-content-between align-items-center form-group">
+                    <span class="help-text">Upload the required Documents</span>
+                    <a class="btn"><span>Back</span></a>
+                </div>
+                <span id="dropdown_url"></span>
+                <span id="uploadfile_url"></span>
+                <form method="post" action="{% url 'uploadPdf' %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="file" name="file" id="file"><br>
+                    <input type="submit" value="Submit">
+
+
+                </form>
+                <div class="modal-wrapper" style="display: none;">
+                    <div class="modal-body">
+                        <p id="modalMsg">Please chose category.</p>
+                        <div class="close-btn"></div>
+                    </div>
+                </div>
+
+                <div class="loader-container" id="loader-div" style="text-align:center">
+                    <img src="{% static 'loading.gif' %}" id="loader-img" height="100" width="100" style="margin-left: 700px;" />
+                </div>
+            </div>
+        </div>
+        <footer>
+            <div class="footer-container">
+                <div class="container-fluid">
+                    Support
+                </div>
+            </div>
+        </footer>
+</body>
+<script type="text/javascript" src="{% static 'assests/js/jquery-3.6.0.min.js' %}"></script>
+
+<script>
+    function getDependentVal(optiontype, id, pId, spId, optionName) {
+        $("#loader-img").show()
+        if (optiontype.value) {
+            $("#" + id).text('')
+            parent = ''
+            subparent = ''
+            orientation = ''
+            height = $("#height").val()
+            width = $("#width").val()
+            if (pId != '') {
+                parent = $("#" + pId).val()
+            }
+            if (spId != '') {
+                subparent = $("#" + spId).val()
+                orientation = $("#orientation").val()
+            }
+
+
+            $.ajax({
+                url: $("#dropdown_url").attr("url"),
+                type: 'POST',
+                data: {
+                    parent: parent,
+                    subparent: subparent,
+                    typeVal: optiontype.value,
+                    optionName: optionName,
+                    orientation: orientation,
+                    height: height,
+                    width: width,
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                },
+                success: function(data) {
+                    $("#" + id).append(data)
+                    $("#loader-img").hide();
+                    console.log(data)
+                }
+            })
+        }
+    }
+
+    $(document).ready(function() {
+        $(".error").text('')
+        $("#type").change(function() {
+            $(".grid,.orientation").hide()
+            if ($("#type").val() == 'Microsoft PowerPoint') {
+                $(".grid,.orientation").show()
+            } else {
+                $("grid-err error,orientation-err error").text('')
+            }
+        })
+    });
+
+    $(document).ready(function() {
+        $("#loader-img").hide();
+        $("#loader-div").removeClass('loader-container')
+        $("#fileUpload").val('')
+        $(".error").text('')
+
+        $("#reference_size").change(function() {
+            $(".height,.width,.metrics").hide()
+            if ($("#reference_size").val() == 'Other') {
+                $(".height,.width,.metrics").show()
+            } else {
+                $(".height-err,.width-err,.metrics-err").text('')
+            }
+        })
+
+        var maxLength = 25;
+        $('#division > option').text(function(i, c) {
+            if (c.length > maxLength) {
+                return c.substr(0, maxLength) + '...';
+            }
+        });
+
+
+        $("#exception").change(function() {
+            if ($("#exception").val() == 'Not Applicable') {
+                $("#step-1").show()
+            } else {
+                $("#step-1").hide()
+                alert("Please process with amanual audit in case of Cobranding,Equal Partnership,Tradeshows,Third Party Events,Premium and Attires and Promotionals Items.")
+            }
+        })
+
+        $('input[type="file"]').change(function(e) {
+            var fileName = e.target.files[0].name;
+            if (fileName.length > 10) fileName = fileName.substring(0, 23);
+            $("#upload-file").text(fileName + ' ...')
+        });
+
+        $('#fileUpload').bind('change', function() {
+            console.log(this.files[0].size)
+            $(".doc_files-err").text('')
+            if (this.files[0].size > 2010946 * 10) {
+                $(".doc_files-err").text('Try To Upload File Less Than 20MB!.')
+                return false
+            }
+        });
+
+
+        $("#process").on('click', function() {
+            var form = $('form')[0];
+            var heatMat = 'no'
+            var typoGraph = 'no'
+            var formData = new FormData(form);
+
+            if (form1Validate()) {
+                $(".error").text('');
+                $("#process").text('Processing...', true);
+                $("#process").attr('disabled', true);
+
+                $.ajax({
+                    url: $("#uploadPdf").attr("url"),
+                    data: formData,
+                    type: 'POST',
+
+
+                    contentType: false,
+                    processData: false,
+                    dataType: 'json',
+                    success: function(resData) {
+                        console.log('resData>>>>>' + resData)
+                        if (resData.process_id) {
+                            localStorage.setItem('process_id', resData.process_id);
+                            window.location = "{{FRONT_URL}}analyse/" + resData.process_id;
+                            // $("#loader-img").hide();
+                        }
+                    }
+                });
+            }
+        })
+    })
+</script>
+
+
+
+</html>

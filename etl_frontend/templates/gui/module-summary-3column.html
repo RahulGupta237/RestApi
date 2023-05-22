@@ -1,0 +1,489 @@
+{% extends "gui/base.html" %}
+{% block content %}
+{% load static %}
+
+<style>
+  .hidediv {
+    display: none;
+  }
+
+  .error {
+    color: brown;
+  }
+
+  .error-analysis .error-title span {
+    font-size: 20px;
+    color: #25adfc;
+    padding: 0 5px;
+    font-weight: 400;
+    text-transform: capitalize;
+    font-family: BrandonGrotesqueMedium;
+    position: relative;
+  }
+
+  .error-analysis .error-title span::after {
+    content: "|";
+    margin-left: 5px;
+  }
+
+  .error-analysis .error-title span:last-child:after {
+    display: none;
+  }
+
+  .error-analysis .error-title span:first-of-type {
+    margin-left: 50px;
+  }
+
+  .check-container i {
+    font-style: normal;
+  }
+
+  .error-analysis.Compliance-error-show .error-body>ul>li,
+  .error-analysis.Non-compliance-error-show .error-body>ul>li {
+    display: none;
+  }
+
+  .error-analysis.Major-error-show .error-body>ul>li,
+  .error-analysis.Minor-error-show .error-body>ul>li {
+    display: none;
+  }
+
+  .error-analysis.Compliance-error-show .error-body>ul>li.compliance {
+    display: flex;
+  }
+
+  .error-analysis.Minor-error-show .error-body>ul>li.minor {
+    display: flex;
+  }
+
+  .error-analysis.Major-error-show .error-body>ul>li:not(.minor) {
+    display: flex;
+  }
+
+  .error-analysis.Non-compliance-error-show .error-body>ul>li.non-compliance {
+    display: flex;
+  }
+
+  .error-analysis.Signature-error-show>div,
+  .error-analysis.Typography-error-show>div {
+    display: none;
+
+  }
+
+  .error-analysis.Signature-error-show .signature-analysis {
+    display: block;
+  }
+
+  .error-analysis.Typography-error-show .typography-analysis {
+    display: block;
+  }
+
+  .cardItem {
+    font-size: 19px;
+  }
+
+  .pagination-list {
+    display: flex;
+    gap: 20px;
+    cursor: pointer;
+  }
+
+  .pagination-list>li {
+    border: 1px solid #E4002B;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    background-color: #E4002B;
+  }
+
+  .pagination-list>li>a {
+    color: #fff;
+  }
+</style>
+<div class="gray-bg-wrapper">
+  <div class="module-wrapper">
+    <div class="container-fluid">
+      <div class="module-head">
+        <div class="arrow-wrap">
+          <a href="javascript:void(0)" onclick="history.back()"><img src="/static/assests/img/arrow-left.svg"
+              alt="arrow" /></a>
+        </div>
+        <div class="head-option-wrap">
+
+          <div class="glossary">
+            <a href="{% url 'detail' %}">glossary</a>
+          </div>
+          <div class="download-wrap">
+            <a href="{%url 'comming-soon' %}">
+              <button type="button"><img src="/static/assests/img/file.png" />download</button>
+            </a>
+          </div>
+          <div class="share-email">
+            <a href="{%url 'comming-soon' %}">
+              <button type="button"><img src="/static/assests/img/Icon feather-share.svg" />Share via Email</button>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="module-body">
+        <div class="module-body-wrap">
+          <div class="module-body-link">
+            <ul>
+              <!-- <li><a href="module.html">brand check summary</a></li> -->
+              <li><a class="active" href="javascript:void(0)">brand check details</a></li>
+
+            </ul>
+          </div>
+        </div>
+        <div id="brand-detail">
+          <div class="brand-detail-wrap">
+            <div class="select-page-wrapper">
+              <div class="page-selection custom-drop-withcheck">
+                <div class="select-page">
+                  <div class="title">select page</div>
+                  <div class="select-options-check page-select">
+                    <div class="option">
+                      <label class="check-container">1
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                      </label>
+                    </div>
+                    <div class="option">
+                      <label class="check-container">2
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                      </label>
+                    </div>
+                    <div class="option">
+                      <label class="check-container">3
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                      </label>
+                    </div>
+                    <div class="option">
+                      <label class="check-container">4
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                      </label>
+                    </div>
+                    <div class="option">
+                      <label class="check-container">5
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="page-selection-slider">
+              <div class="slider-wrap">
+                <div class="page-slider">
+
+                  <div class="item">
+                    <div class="item-wrap">
+                      <div class="img-wrap">
+                        <img src="{{BACKEND_URL}}{{IMAGE_PATH}}" alt="">
+                      </div>
+                      <div class="txt-wrap">Page 1</div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            <div class="list-and-error three-column">
+              <div class="list-box">
+                <div class="error-list">
+                  <div class="error-list-inner">
+                    <div class="error-head">
+                      <div class="error-title">
+                        <span>common errors</span>
+                        <span>specific errors</span>
+                      </div>
+                      <div class="error-toogle structure-change">
+                        <label class="switch-toogle">
+                          <input type="checkbox" checked>
+                          <span class="slider-btn round"></span>
+                        </label>
+                      </div>
+                    </div>
+                    <div class="error-list-body">
+                      <ul>
+                        <li><a href="javascript:void(0)">Page 1</a></li>
+
+                      </ul>
+                    </div>
+                    <div class="error-list-bottom">
+                      <span class="prev"><a href="javascript:void(0)">previous</a></span>
+                      <span class="next"><a href="javascript:void(0)">next</a></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="sinle-slider">
+                  <div class="single-slider-inner">
+                    <ul>
+                      <li>
+
+
+                        {% for errcls,num in errorList.items %}
+                        {% if errcls != 'IMAGE_PATH' %}
+                        {% if num.status == 0 %}
+                        <span class="SIZE tooltipItemContainer"
+                          style="top:{{num.bBox_top}}%;left:{{num.bBox_left}}%;">{{num.counter}}
+                          <span class="tooltipItem">
+
+
+                            {% for msg in num.message %}
+                            <p class="cardItem ">{{msg|safe}} </p>
+                            {% endfor %}
+
+                            <a class="next-btn right-arrow">‹</a>
+                            <a class="prev-btn left-arrow">›</a>
+                          </span>
+                        </span>
+                        {% endif %}
+                        {% endif %}
+                        {% endfor %}
+
+
+
+                        {% for errcls,num in nwSigDict.items %}
+                        {% if errcls != 'IMAGE_PATH' %}
+                        {% if num.status == 0 %}
+                        <span class="{{errcls}} tooltipItemContainer"
+                          style="top:{{num.bBox_top}}%;left:{{num.bBox_left}}%;">{{num.counter}}
+                          <span class="tooltipItem">
+
+                            {% for msg in num.messages %}
+                            <p class="cardItem ">{{msg|safe}}</p>
+                            {% endfor %}
+
+                            <a class="next-btn right-arrow">‹</a>
+                            <a class="prev-btn left-arrow">›</a>
+                          </span>
+                        </span>
+                        {% endif %}
+                        {% endif %}
+                        {% endfor %}
+
+
+
+                        
+                    
+                        {% for errcls in typoErrMsgList %}
+                        {% if errcls.status == 0 %}
+                        <span class="tooltipItemContainer"
+                          style="bottom:{{errcls.bBox_top}}%;left:{{errcls.bBox_left}}%;">{{errcls.counter}}
+                          <span class="tooltipItem">
+                            <p class="cardItem">{{errcls.message|safe}}</p>
+                            <a class="next-btn right-arrow">‹</a>
+                            <a class="prev-btn left-arrow">›</a>
+                          </span>
+                        </span>
+                        {% endif %}
+                        {% endfor %}
+                        {% if type != 'Microsoft PowerPoint' %}
+
+
+                        <img class="large_image" src="{{BACKEND_URL}}{{IMAGE_PATH}}" /></li>
+                        {% endif %}
+                        {% if type == 'Microsoft PowerPoint' %}
+                        <img  class="small_image" src="{{BACKEND_URL}}{{IMAGE_PATH}}" /></li>
+                        {% endif %}
+
+                      </ul>
+
+                    <style>
+
+                      .sinle-slider{
+                          width: 510px !important;
+                          flex-shrink: 0 !important;
+                          overflow-x: scroll;
+                          overflow-y: scroll;
+                        }
+
+                        .large_images{
+                          width: 476px !important;
+                          height: 670px;
+                          object-fit: cover !important;
+                        }
+                        .small_images{
+                        width: 476px !important;
+                        height: 268px;
+                        object-fit: contain !important;
+                        /* object-position: center; */
+
+                        }
+                    </style>
+                    <div class="single-slider-bottom">
+                      {% if prevPage %}
+                      <span class="pre-page"><a href="{{prevPage}}">prev</a></span> {% endif %}
+                      {% comment %} <ul class="pagination-list"> {% endcomment %}
+                        {% comment %} {% for i in totalPage %} {% endcomment %}
+                        {% comment %} {% if i == currentPage %} {% endcomment %}
+                        <a href="{{FRONT_URL}}{{currentPage}}">Page-{{currentPage}}</a>
+                        {% comment %} {% else %} {% endcomment %}
+                        {% comment %} <li><a href="{{FRONT_URL}}{{i}}">{{i}}</a></li>
+                        {% endif %} {% endcomment %}
+                        {% comment %} {% endfor %} {% endcomment %}
+                        {% comment %} </ul> {% endcomment %}
+                      {% if nextPage %}
+                      <span class="nxt-page"><a href="{{nextPage}}">next</a></span>{% endif %}
+                    </div>
+                  </div>
+                </div>
+                <div class="small-error-analysis" style="width:60%;flex-shrink: 0;">
+                  <div class="error-analysis">
+                    {% if signatureData  and type != 'Microsoft PowerPoint'  %}
+                    <div class="signature-analysis error-box">
+                      <div class="error-title">Signature Analysis</div>
+                      <div class="error-body">
+                        <div class="small-error-analysis-radio">
+
+                          <div class="error-analysis-radio">
+                            <strong class="error-radio">CRITERIA</strong>
+                            <p>
+                            </p>
+                            <div class="error-radio-clr">
+                              <h4>ON</h4>
+                              <h4>OFF</h4>
+                            </div>
+                          </div>
+
+                        </div>
+                        {% for sigKey,sigVal in signatureData.items %}
+
+                        <div class="small-error-analysis-radio">
+
+                          <div class="error-analysis-radio">
+                            <strong class="error-radio">{{sigKey|upper}}</strong>
+                            <p>{{sigVal.message}}</p>
+                            {% if sigVal.status == 1 %}
+                            <div class="error-radio-clr"><span></span><small></small></div>
+                            {% endif %}
+                            {% if sigVal.status == 0 %}
+                            <div class="error-radio-clr"> <small></small><samp>{{sigVal.counter}}</samp></div>
+                            {% endif %}
+                          </div>
+
+                        </div>
+                        {% endfor %}
+
+
+                      </div>
+                    </div>
+                    {% endif %}
+
+
+                    {% if typogrphyData %}
+                    <div class="typography-analysis error-box">
+                      <div class="error-title">Typography Analysis</div>
+                      <div class="error-body">
+                        <div class="small-error-analysis-radio">
+                          <div class="error-analysis-radio">
+                            <strong class="error-radio">CRITERIA</strong>
+                            <p>
+                            </p>
+                            <div class="error-radio-clr">
+                              <h4>ON</h4>
+                              <h4>OFF</h4>
+                            </div>
+                          </div>
+                        </div>
+                        {% for typoKey,typoVal in typogrphyData.items %}
+                        {% if typoKey|upper != 'IMAGE_PATH' %}
+                        <div class="small-error-analysis-radio">
+                          <div class="error-analysis-radio">
+                            <strong class="error-radio">{{typoKey|upper}}</strong>
+                            <p>{{typoVal.message}}</p>
+                            {% if typoVal.status == 1 %}
+                            <div class="error-radio-clr"><span></span><small></small></div>
+                            {% endif %}
+                            {% if typoVal.status == 0 %}
+                            <div class="error-radio-clr"> <small></small><samp>{{typoVal.counter}}</samp></div>
+                            {% endif %}
+                          </div>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                      </div>
+                    </div>
+                    {% endif %}
+
+                    {% if templateData  and type == 'Microsoft PowerPoint' %}
+                    <div class="signature-analysis error-box">
+                      <div class="error-title">Template Analysis</div>
+                      <div class="error-body">
+                        <div class="small-error-analysis-radio">
+                          <div class="error-analysis-radio">
+                            <strong class="error-radio">CRITERIA</strong>
+                            <p>
+                            </p>
+                            <div class="error-radio-clr">
+                              <h4>ON</h4>
+                              <h4>OFF</h4>
+                            </div>
+                          </div>
+                        </div>
+                        {% for tempKey,tempVal in templateData.items %}
+
+                        <div class="small-error-analysis-radio">
+
+                          <div class="error-analysis-radio">
+                            <strong class="error-radio">{{tempKey|upper}}</strong>
+                            <p>{{tempVal.message}}</p>
+                            {% if tempVal.status == 1 %}
+                            <div class="error-radio-clr"><span></span><small></small></div>
+                            {% endif %}
+                            {% if tempVal.status == 0 %}
+                            <div class="error-radio-clr"> <small></small><samp>{{tempVal.counter}}</samp></div>
+                            {% endif %}
+                          </div>
+
+                        </div>
+                        {% endfor %}
+                      </div>
+                    </div>
+                    {% endif %}
+
+                  </div>
+                </div>
+                <div class="error-wrapper">
+                  <div class="brand-errors">
+                    <div class="common-err error-box">
+                      <div class="error-title">Common Errors</div>
+                      <div class="error-body">
+                        <ul>
+                          <li class="signature-error">Incorrect size detected. Kindly change it.</li>
+                          <li class="signature-error">Wrong orientation detected across collateral. Kindly change it.
+                          </li>
+                          <li class="typography-error">Adequate clear spacing on all sides. Kindly replace the image.
+                          </li>
+                          <li class="typography-error">Font treatment detected across collateral. Kindly remove them.
+                          </li>
+                          <!-- <li class="template-error">More than three energy colors detected in body copy. Kindly reduce</li>
+                                  <li class="template-error">Abbreviations detected across collateral. Kindly replace them</li>
+                                  <li class="signature-error">Images used in the collateral don't express positivity Please replace all the images</li>
+                                  <li class="signature-error">Lens flare detected in all pages of the collateral. Kindly replace the images</li>
+                                  <li class="typography-error">Treatment to typography detected across all pages Kindly use untreated text</li>
+                                  <li class="typography-error">Non approved Abbott typeface detected Kindly use Abbott approved typeface</li>
+                                  <li class="template-error">More than three energy colors detected in body copy. Kindly reduce</li>
+                                  <li class="template-error">Abbreviations detected across collateral. Kindly replace them</li> -->
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,30 @@
+{
+
+"Print": [
+    {"Advertisements":[{"Standard":["8.5” x 11” (A4)"]}]},
+    {"Brochure":[{"Standard":["A1 23.4” x 33.1”","A2 18” x 24”","A3 11.7” x 16.5”","A4 8.5” x 11”","A5 5.8” x 8.3”","A6 4.1” x 5.8”"],"Z – Fold":["3.8976” x 8.2677”"],"Half Page, vertical":["4.1399” x 11.6926”"],"Trifold":["3.8583” x 8.6614"],"Custom":["Other"]}]},
+    {"Flyer":[{"Standard":["8.5” x 11” (A4)"],"Custom":["Other"]}]},
+    {"Newsletter":[{"Standard":["8.5” x 11” (A4)"],"Custom":["Other"]}]},
+    {"Poster":[{"Standard":["8.5” x 11” (A4)","18” x 24” (A2)"],"Custom":["Other"]}]},
+    {"Direct Mail Postcard":[{"Standard":["8.5” x 11” (A4)"],"Custom":["Other"]}]},
+    {"Flashcard":[{"Standard":["7.0079” x 5”"],"Custom":["Other"]}]},
+    {"Folder":[{"Standard":["8.656” x 12.3981”"],"Custom":["Other"]}]},
+    {"Meeting Agenda":[{"Standard":["5.8465” x 8.2677”"],"Custom":["Other"]}]},
+    {"Pamphlet 2-Pager":[{"Standard":["5.8465” x 8.2677”"],"Custom":["Other"]}]},
+    {"Retractable Banners":[{"Standard":["36” x 72”"],"Custom":["Other"]}]},
+    {"Notebook Covers":[{"Standard":["5.8” x 8.3”"],"Custom":["Other"]}]},
+    {"Billboard-Horizontal":[{"Standard":["48” x 12”"],"Scaled":["8’ x 2’","12’ x 3’","16’ x 4’"],"Custom":["Other"]}]},
+    {"Hanging Banners":[{"Standard":["72” x 24”"],"Custom":["Other"]}]},
+    {"Name Badge":[{"Custom":["Other"]}]},
+    {"Certificate":[{"Award of Excellence":["Other"],"Participation":["Other"]," Attendance":["Other"],"Custom":["Other"]}]},
+    {"Odd Size":[{"Custom":["Other"]}]}
+],
+"Digital": [
+    {"Website":[{"Not Applicable":["Not Applicable"]} ]},
+    {"Email Communication":[{"Descriptor Style":["Not Applicable"],"Title Style":["Not Applicable"],"Announcement Style":["Not Applicable"],"Newsletter Style":["Not Applicable"],"Two Column Style":["Not Applicable"]}]},
+    {"Online Ads":[{"Medium Rectangle  Format":["300px x 250px"],"Square Format":["250px x 250px"],"Vertical Format":["120px x 240px"],"Leader board Format":["728px x 90px","970px x 250px"],"Skyscraper Vertical Format":["120px x 600px","160px x 600px","300px x 60'0px"],"Full Banner Horizontal Format":["438px x 60px"],"Half Banner Horizontal Format":["320px x 50px"]}]},
+    {"Social Media":[{"Facebook Post":["492px x 276px"],"Twitter Post":["1200px 675px"],"Instagram Post":["1080px x 1080px"],"Linkedin Post":["492px x 276px"],"Facebook Cover Image in Desktop Browser":["832px x 312px"],"Twitter Cover Images in Desktop Browser":["1500px x 380px"],"Youtube Cover Images in Desktop Browser":["2560px x 423px"]} ]},
+    {"Microsoft PowerPoint":[{"Not Applicable":["Not Applicable"]} ]}
+]
+
+}

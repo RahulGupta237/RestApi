@@ -1,0 +1,83 @@
+{% extends "gui/base.html" %}
+{% block content %}
+{% load static %}
+<div class="white-bg-wrapper">
+    <!-- <div class="detail-wrapper">
+        <table width="80%" align="center">
+            <Tr><td align="center"><strong>Typography Meta Info</strong></td></Tr>
+            {% for typoMetaVal in typography_meta %}
+            <Tr>
+                <Td>{{typoMetaVal}}</Td>
+            </Tr>
+
+                        {% endfor %}
+        </table>
+      
+        <table width="80%" align="center">
+            <Tr><td align="center"><strong>Signature Meta Info</strong></td></Tr>
+            {% for signatureMetaVal in signature_meta %}
+            <Tr>
+                <Td>{{signatureMetaVal}}</Td>
+            </Tr>
+
+                        {% endfor %}
+        </table>
+        
+                        
+    </div> -->
+    <div class="small-error-analysis" style="width:100%;flex-shrink: 0;">
+                  <div class="error-analysis">
+                    <div class="typography-analysis error-box" style="max-height: none;">
+                      <div class="error-title" style="text-align:center;">Typography Meta Information</div>
+                      <div class="error-analysis-radio">
+                            <p><strong>Page No: </strong>{{typography_meta.0.page_no}}</p>    
+                            <p><strong>Detected Fonts: </strong>{{typography_meta.0.detectedFonts}}</p>    
+                         </div>  
+                         
+                         <div class="error-analysis-radio">
+                            <p><strong>Exception Fonts: </strong>{{typography_meta.0.exceptionFonts}}</p>    
+                            <p><strong>Image: </strong><a href="{{BACKEND_URL}}{{typography_meta.0.image}}" target="_blank">View</a></p>    
+                         </div>  
+                         
+                        <div class="error-analysis-radio">
+
+                            <p><strong>Text, Font, Size, Textcase, Fontstyle </strong></p>    
+                         </div>  
+                         
+
+                      {% for typoMetaVal in typography_meta %}
+                           {% if typoMetaVal.fontname %}  
+                          <div class="error-analysis-radio">    
+                            
+                           
+                            <p>{{typoMetaVal.text}}, {{typoMetaVal.fontname}}, {{typoMetaVal.size}}, {{typoMetaVal.textcases}}, {{typoMetaVal.fontstyle}}</p>    
+                         </div>
+                         {% endif %}
+                      {% endfor %}
+                    </div>                    
+
+                    <br>
+                    <div class="signature-analysis error-box">
+                      <div class="error-title" style="text-align:center">Signature Meta Information</div>
+                      <div class="error-analysis-radio">
+                            <p><strong>Field, Value</strong></p>    
+                         </div>  
+                      {% for signatureMetaVal in signature_meta %}
+                      <div>
+                        <div class="small-error-analysis-radio">
+                            
+                          <div class="error-analysis-radio">
+                            
+                            <p>{{signatureMetaVal.level}}: {{signatureMetaVal.val}}</p>    
+                          </div>
+                        </div>
+                        
+                      </div>
+                      {% endfor %}
+                    </div>
+                    
+
+                  </div>
+                </div>
+</div>
+{% endblock %}

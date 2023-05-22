@@ -1,0 +1,126 @@
+{% extends "gui/base.html" %}
+{% block content %}
+{% load static %}
+<style>
+    .progress .progress-text {
+        position: absolute;
+        left: 24%;
+        top: -42px;
+        text-align: center;
+        color: #000;
+        font-size: 14px;
+        text-shadow: 1px 1px 1px #fff;
+        background: #fff;
+        width: auto;
+        padding: 5px 10px 0;
+        box-sizing: border-box;
+        border-radius: 5px;
+        line-height: 1.5;
+    }
+
+    .progress {
+        overflow: initial;
+    }
+</style>
+<div class="body-container-wrapper">
+    <div class="container-fluid">
+        <div class="pdf-slider-wrapper">
+            <div class="action-btns">
+                {% if isHeatMap == 'on' %}
+                <a type="button" id="analyseDoc" class="btn btn-secondary">
+                    <span>Heatmap Report</span>
+                </a>
+                {% endif %}
+
+                {% comment %} {% if isTypoGraphy == 'on' %} {% endcomment %}
+                <a type="button" id="typoDetect" class="btn btn-secondary" style="display:block"><span>Brand Check
+                        Report</span></a>
+                {% comment %} {% endif %} {% endcomment %}
+            </div>
+            <section class="shutter-view">
+                        {% if imgFiles %}
+                        {% for image in imgFiles %}
+
+                        <div class="shutter-slide">
+                            <select>
+                                <option>Title Slide</option>
+                                <option>Section Divider</option>
+                                <option>Closing slide</option>
+                                <option>Ignore</option>
+                            </select>
+                        <figure>  <img src="{{BACKEND_URL}}{{image}}" alt=""> </figure>
+                          <div class="check-wrap">
+                            <label class="check-container left-align">
+                                Ignore
+                                <input type="checkbox" >
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                        <span class="slide-number">1</span>
+                        </div>
+
+                        {% endfor %}
+                        {% endif %}
+
+                    </section>
+                    <section class="pagination-wrap">
+                            <ul class="pagination">
+                              <li class="page-item ">
+                                <span class="page-link">First Page</span>
+                              </li>
+                              <li class="page-item disabled">
+                                <span class="page-link">Previous</span>
+                              </li>
+                              <li class="page-item"><a class="page-link" href="#">1</a></li>
+                              <li class="page-item active">
+                                <span class="page-link">
+                                  2
+                                </span>
+                              </li>
+                              <li class="page-item"><a class="page-link" href="#">3</a></li>
+                              <li class="page-item">
+                                <a class="page-link" href="#">Next</a>
+                              </li>
+                              <li class="page-item">
+                                <a class="page-link" href="#">Last Page</a>
+                              </li>
+                            </ul>
+                    </section>
+<!--            <div class="carousel-wrapper ">-->
+<!--                <div class="progress">-->
+<!--                    <span class="progress-text" id="progress_status" style="display:none"></span>-->
+<!--                    <div class="progress-bar" id="progressdiv" role="progressbar" aria-valuenow="1" aria-valuemin="1"-->
+<!--                        aria-valuemax="1" style="width:1%">-->
+<!--                        1%-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="owl-carousel owl-theme">-->
+<!--                    {% if imgFiles %}-->
+<!--                    {% for image in imgFiles %}-->
+
+<!--                    <div class="item"><div class="check-wrap">-->
+<!--                                <label class="check-container left-align">-->
+<!--                                    Ignore-->
+<!--&lt;!&ndash;                                    <input class= "ignore_image" type="checkbox" value="{{ forloop.counter }}"  >&ndash;&gt;-->
+<!--                                    <input class= "ignore_image" type="checkbox" value="{{ image }}"  >-->
+<!--                                    <span class="checkmark"></span>-->
+<!--                                </label>-->
+<!--                            </div><img src="{{BACKEND_URL}}{{image}}" alt=""> </div>-->
+<!--                    {% endfor %}-->
+<!--                    {% endif %}-->
+<!--                </div>-->
+
+<!--            </div>-->
+        </div>
+    </div>
+</div>
+</body>
+<span resp="notprocess" id="typoGraphyRes"></span>
+<span pId="{{process_id}}" id="process_id"></span>
+<span resp="{{neuroApiResponse}}" id="neuroApiResponse"></span>
+<span url="{% url 'analysing' %}" id="analyse_doc_url"></span>
+<span url="/final_report/{{process_id}}/1" id="pdf_url"></span>
+<span url="{% url 'typography' %}" id="typo_url"></span>
+<span url="{% url 'trackstatus' %}" id="trackstatus"></span>
+
+{% endblock %}

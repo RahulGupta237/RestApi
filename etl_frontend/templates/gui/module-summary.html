@@ -1,0 +1,434 @@
+{% extends "gui/base.html" %}
+{% block content %}
+{% load static %}
+<div class="gray-bg-wrapper">
+  <div class="module-wrapper">
+    <div class="container-fluid">
+      <div class="module-head">
+        <div class="arrow-wrap">
+          <a href="required-document.html"><img src="/static/assests/img/arrow-left.svg" alt="arrow" /></a>
+        </div>
+        <div class="head-option-wrap">
+          <div class="parameter custom-drop-withcheck">
+            <div class="select-list-check">
+              <div class="title">Parameter</div>
+              <div class="select-options-check">
+                <div class="option">
+                  <label class="check-container"><i>Signature</i>
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                  </label>
+                </div>
+                <div class="option">
+                  <label class="check-container"><i>Typography</i>
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                  </label>
+                </div>
+                <div class="option">
+                  <label class="check-container"><i>Template</i>
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                  </label>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+
+          <div class="glossary">
+            <a href="detail.html">glossary</a>
+          </div>
+          <div class="download-wrap">
+            <button type="button"><img src="/static/assests/img/file.png" />download</button>
+          </div>
+          <div class="share-email">
+            <button type="button"><img src="/static/assests/img/Icon feather-share.svg" />Share via Email</button>
+          </div>
+        </div>
+      </div>
+      <div class="module-body">
+        <div class="module-body-wrap">
+          <div class="module-body-link">
+            <ul>
+              <li><a href="module.html">brand check summary</a></li>
+              <li><a class="active" href="module-detail.html">brand check details</a></li>
+
+
+            </ul>
+          </div>
+        </div>
+        <div id="brand-detail">
+          <div class="brand-detail-wrap">
+            <div class="select-page-wrapper">
+              <div class="page-selection custom-drop-withcheck">
+                <div class="select-page">
+                  <div class="title">select page</div>
+                  <div class="select-options-check page-select">
+                    <div class="option">
+                      <label class="check-container">1
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                      </label>
+                    </div>
+                    <div class="option">
+                      <label class="check-container">2
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                      </label>
+                    </div>
+                    <div class="option">
+                      <label class="check-container">3
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                      </label>
+                    </div>
+                    <div class="option">
+                      <label class="check-container">4
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                      </label>
+                    </div>
+                    <div class="option">
+                      <label class="check-container">5
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="page-selection-slider">
+              <div class="slider-wrap">
+                <div class="page-slider">
+
+                  {% for image in typoImages %}
+                  <div class="item">
+                    <div class="item-wrap">
+                      <div class="img-wrap">
+                        <img src="{{BACKEND_URL}}{{image}}" alt="">
+                      </div>
+                      <div class="txt-wrap">Page {{forloop.counter}}</div>
+                    </div>
+                  </div>
+                  {% endfor %}
+
+
+
+                </div>
+              </div>
+            </div>
+            <div class="list-and-error ">
+              <div class="list-box">
+                <div class="error-list">
+                  <div class="error-list-inner">
+                    <div class="error-head">
+                      <div class="error-title">
+                        <span>common errors</span>
+                        <span>specific errors</span>
+                      </div>
+                      <div class="error-toogle structure-change">
+                        <label class="switch-toogle">
+                          <input type="checkbox" checked>
+                          <span class="slider-btn round"></span>
+                        </label>
+                      </div>
+                    </div>
+                    <div class="error-list-body">
+                      <ul>
+                        {% for page in pageCount %}
+                        <li><a href="javascript:void(0)">Page {{page}}</a></li>
+                        {% endfor %}
+                      </ul>
+                    </div>
+                    <div class="error-list-bottom">
+                      <span class="prev"><a href="javscript:void(0)">previous</a></span>
+                      <span class="next"><a href="javscript:void(0)">next</a></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="sinle-slider">
+                  <div class="single-slider-inner">
+                    <ul>
+                      <li>
+                        <span class="one">1</span>
+                        <span class="two">2</span>
+                        <span class="three">3</span>
+                        <span class="four">4</span>
+                        <span class="five">5</span>
+                        <span class="six">6</span>
+                        <img src="{{BACKEND_URL}}{{typogrphyData.IMAGE_PATH.message}}" /></li>
+                    </ul>
+                    <div class="single-slider-bottom">
+                      <span class="pre-page"><a href="{{prevPage}}">previous page</a></span>
+                      <span class="nxt-page"><a href="{{nextPage}}">next page</a></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="error-wrapper">
+                  <div class="brand-errors">
+                    <div class="common-err error-box">
+                      <div class="error-title">Common Errors</div>
+                      <div class="error-body">
+                        <ul>
+                          <li class="signature-error">Images used in the collateral don't express positivity Please
+                            replace all the images</li>
+                          <li class="signature-error">Lens flare detected in all pages of the collateral. Kindly replace
+                            the images</li>
+                          <li class="typography-error">Treatment to typography detected across all pages Kindly use
+                            untreated text</li>
+                          <li class="typography-error">Non approved Abbott typeface detected Kindly use Abbott approved
+                            typeface</li>
+                          <li class="template-error">More than three energy colors detected in body copy. Kindly reduce
+                          </li>
+                          <li class="template-error">Abbreviations detected across collateral. Kindly replace them</li>
+                          <li class="signature-error">Images used in the collateral don't express positivity Please
+                            replace all the images</li>
+                          <li class="signature-error">Lens flare detected in all pages of the collateral. Kindly replace
+                            the images</li>
+                          <li class="typography-error">Treatment to typography detected across all pages Kindly use
+                            untreated text</li>
+                          <li class="typography-error">Non approved Abbott typeface detected Kindly use Abbott approved
+                            typeface</li>
+                          <li class="template-error">More than three energy colors detected in body copy. Kindly reduce
+                          </li>
+                          <li class="template-error">Abbreviations detected across collateral. Kindly replace them</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="error-analysis">
+              <div class="signature-analysis error-box">
+                <div class="error-title">1. Signature Analysis</div>
+                <div class="error-body">
+                  <ul>
+
+                    {% for sigKey,sigVal in signatureData.items %}
+                    {% if sigVal.status == 1 %}
+                    <li class="compliance">
+                      <div class="error-txt">
+                        <div class="error-txt-body">
+                          {{sigKey}} {{sigVal.message}}
+                        </div>
+                      </div>
+                      <div class="error-check">
+                        <img src="/static/assests/img/tick.png" />
+                      </div>
+                      <div class="error-num">
+                        <div class="errorbox green"><span>{{sigVal.counter}}</span></div>
+                      </div>
+                    </li>
+                    {% endif %}
+                    {% if sigVal.status == 0 %}
+
+                    <li class="non-compliance">
+                      <div class="error-txt">
+                        <div class="error-txt-body">
+                          Only approved fonts used Print (Brandon Grotesque, Mercury Text 61) and Digital ( Gabbro and
+                          Georgia ) for English and Roman script languages. Only approved fonts used for languages as
+                          per guidelines (Arabic, Cyrillic, Greek, Japanese, Korean, Chinese,
+                        </div>
+                        <div class="error-txt-check">
+                          <ul>
+                            <li>
+                              <label class="custom-check-container">Non Approved Arad font detected in body copy (5)
+                                <input type="checkbox">
+                                <span class="custom-checkmark"></span>
+                              </label>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                      <div class="error-check">
+                        <img src="/static/assests/img/close.png">
+                      </div>
+                      <div class="error-num">
+                        <div class="errorbox red"><span>1</span></div>
+                      </div>
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+                    
+                  </ul>
+                </div>
+              </div>
+              <div class="typography-analysis error-box">
+                <div class="error-title">2. Typography Analysis</div>
+                <div class="error-body">
+                  <ul>
+
+
+                    {% for typoKey,typoVal in typogrphyData.items %}
+                    {% if typoVal.status == 0 %}
+                    <li class="non-compliance">
+                      <div class="error-txt">
+                        <div class="error-txt-body">{{typoVal.message}}
+                        </div>
+                        <div class="error-txt-check">
+                          <ul>
+                            <li>
+                              <label class="custom-check-container">Non Approved Arad font detected in body copy (5)
+                                <input type="checkbox">
+                                <span class="custom-checkmark"></span>
+                              </label>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                      <div class="error-check">
+                        <img src="/static/assests/img/close.png">
+                      </div>
+                      <div class="error-num">
+                        <div class="errorbox red"><span>{{typoVal.counter}}</span></div>
+                      </div>
+                    </li>
+                    {% endif %}
+                    {% if typoVal.status == 1 %}
+                    <li class="compliance">
+                      <div class="error-txt">
+                        <div class="error-txt-body">
+                          No treatments to typography ( gradients, 3D effects, outlines, shadows, distortion of fonts)
+                        </div>
+                      </div>
+                      <div class="error-check">
+                        <img src="/static/assests/img/tick.png">
+                      </div>
+                      <div class="error-num">
+                        <div class="errorbox green"><span>2</span></div>
+                      </div>
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .page-selection-slider.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  .sinle-slider {
+    width: 100%;
+  }
+
+  .sinle-slider img {
+    width: 100%;
+  }
+
+  .error-analysis .error-title span,
+  .common-err .error-title span {
+    font-size: 20px;
+    color: #25adfc;
+    padding: 0 5px;
+    font-weight: 400;
+    text-transform: capitalize;
+    font-family: BrandonGrotesqueMedium;
+    position: relative;
+  }
+
+  .error-analysis .error-title span::after,
+  .common-err .error-title span::after {
+    content: "|";
+    margin-left: 5px;
+  }
+
+  .error-analysis .error-title span:last-child:after,
+  .common-err .error-title span:last-child:after {
+    display: none;
+  }
+
+  .error-analysis .error-title span:first-of-type,
+  .common-err .error-title span:first-of-type {
+    margin-left: 50px;
+  }
+
+  .check-container i {
+    font-style: normal;
+  }
+
+  .error-analysis.Compliance-error-show .error-body>ul>li,
+  .error-analysis.Non-compliance-error-show .error-body>ul>li {
+    display: none;
+  }
+
+  .error-analysis.Major-error-show .error-body>ul>li,
+  .error-analysis.Minor-error-show .error-body>ul>li {
+    display: none;
+  }
+
+  .error-analysis.Compliance-error-show .error-body>ul>li.compliance {
+    display: flex;
+  }
+
+  .error-analysis.Minor-error-show .error-body>ul>li.minor {
+    display: flex;
+  }
+
+  .error-analysis.Major-error-show .error-body>ul>li:not(.minor) {
+    display: flex;
+  }
+
+  .error-analysis.Non-compliance-error-show .error-body>ul>li.non-compliance {
+    display: flex;
+  }
+
+  .error-analysis.Signature-error-show>div,
+  .error-analysis.Typography-error-show>div {
+    display: none;
+
+  }
+
+  .error-analysis.Signature-error-show .signature-analysis {
+    display: block;
+  }
+
+  .error-analysis.Typography-error-show .typography-analysis {
+    display: block;
+  }
+
+  .brand-errors.Signature-error-show li,
+  .brand-errors.Typography-error-show li,
+  .brand-errors.Template-error-show li {
+    display: none;
+  }
+
+  .brand-errors.Signature-error-show li.signature-error {
+    display: block;
+  }
+
+  .brand-errors.Typography-error-show li.typography-error {
+    display: block;
+  }
+
+  .brand-errors.Template-error-show li.template-error {
+    display: block;
+  }
+
+  .slider-btn {
+    background-color: #43A6E6;
+  }
+
+  .Minor-error-show .minornone {
+    display: none !important;
+  }
+
+  /* .Signature-error-show .error-title span{display: none;}
+.Typography-error-show .error-title span{display: none;}
+.Template-error-show .error-title span{display: none;} */
+</style>
+{% endblock %}
